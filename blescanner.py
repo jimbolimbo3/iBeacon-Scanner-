@@ -178,22 +178,42 @@ def parse_events(sock, loop_count=100):
                         print "-------distanza-------", distanza
                         print " metri"
 		    # build the return string
-                    Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-		    Adstring += ","
-		    Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6]) 
-		    Adstring += ","
-		    Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
-		    Adstring += ","
-		    Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
-		    Adstring += ","
-		    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
-		    Adstring += ","
-		    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
-            Adstring += ","
-            Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
-            Adstring += ","
-            Adstring += "%i" % distanza
+            # Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+		    # Adstring += ","
+		    # Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
+		    # Adstring += ","
+		    # Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+            # Adstring += ","
+            # Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+            # Adstring += ","
+            # Adstring += "%i" % distanza
 		    #print "\tAdstring=", Adstring
+            		    # build the return string
+            # Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+		    # Adstring += ","
+		    # Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
+		    # Adstring += ","
+		    # Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
+		    # Adstring += ","
+		    Adstring = "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+            Adstring += ", "
+            Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+            Adstring += ", "
+            Adstring += "%i" % distanza
+            Adstring += " metri"
+		    print "\tAdstring=", Adstring
+
+
  		    myFullList.append(Adstring)
                 done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
