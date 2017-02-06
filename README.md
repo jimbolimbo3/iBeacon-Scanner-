@@ -1,3 +1,4 @@
+#My version of iBeracon Scanner with distance
 SwitchDoc Labs, LLC
 June 2014
 
