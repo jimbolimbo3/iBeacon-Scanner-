@@ -1,5 +1,14 @@
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
-# JCS 06/07/14
+# JCS 06/07/14 https://github.com/switchdoclabs/iBeacon-Scanner-/blob/master/blescan.py
+# BISOGNA INSTALLARE PYTHON BLUEZ PER FORZA
+# sudo apt-get install python-bluez
+
+
+
+#########################################
+#CIAO CONSY##############################
+#########################################
+
 
 DEBUG = False
 # BLE scanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
@@ -157,9 +166,16 @@ def parse_events(sock, loop_count=100):
 		    	# commented out - don't know what this byte is.  It's NOT TXPower
                     	txpower, = struct.unpack("b", pkt[report_pkt_offset -2])
                     	print "\t(Unknown):", txpower
-	
+                        interorssi=int(rssi)
                     	rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
                     	print "\tRSSI:", rssi
+                        interorssi=int(rssi)
+                        interotxpower=int(txpower)
+                        #provo distanza
+                        n = 1.8 #(in free space)
+                        d = 10 ^ ((interotxpower - interorssi) / (10 * n)) 
+                        print "-------distanza-------", d
+                        print " metri"
 		    # build the return string
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 		    Adstring += ","
@@ -178,5 +194,3 @@ def parse_events(sock, loop_count=100):
                 done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     return myFullList
-
-
