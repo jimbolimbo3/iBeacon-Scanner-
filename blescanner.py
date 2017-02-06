@@ -189,7 +189,10 @@ def parse_events(sock, loop_count=100):
 		    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
 		    Adstring += ","
 		    Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
-
+            Adstring += ","
+            Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+            Adstring += ","
+            Adstring += "%i" % distanza
 		    #print "\tAdstring=", Adstring
  		    myFullList.append(Adstring)
                 done = True
