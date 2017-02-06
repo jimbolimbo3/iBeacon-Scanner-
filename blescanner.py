@@ -158,6 +158,7 @@ def parse_events(sock, loop_count=100):
 		
 		    if (DEBUG == True):
 			print "-------------"
+                        global distanza
                     	#print "\tfullpacket: ", printpacket(pkt)
 		    	print "\tUDID: ", printpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6])
 		    	print "\tMAJOR: ", printpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4])
@@ -173,8 +174,8 @@ def parse_events(sock, loop_count=100):
                         interotxpower=int(txpower)
                         #provo distanza
                         n = 1.8 #(in free space)
-                        d = 10 ^ ((interotxpower - interorssi) / (10 * n)) 
-                        print "-------distanza-------", d
+                        distanza = 10 ^ ((interotxpower - interorssi) / (10 * n)) 
+                        print "-------distanza-------", distanza
                         print " metri"
 		    # build the return string
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
