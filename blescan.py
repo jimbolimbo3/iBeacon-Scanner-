@@ -164,14 +164,14 @@ def parse_events(sock, loop_count=100):
                     Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 		    #Adstring += "Distanza"
 		    #Adstring += "%i" % 10^((int(struct.unpack("b", pkt[report_pkt_offset - 2])) - int(struct.unpack("b", pkt[report_pkt_offset - 1]))) / (10 * n)) 
-		    #Adstring += ","
+		    Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
 		    #Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
 		    #Adstring += ","
 		    Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])
 		    Adstring += ","
-		    Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -1])[2:4])
+		    Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])
 
 
 		    #print "\tAdstring=", Adstring
