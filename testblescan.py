@@ -1,7 +1,7 @@
-# test BLE Scanning software
+# test BLE Scanning software###uso blescan.py
 # jcs 6/8/2014
 
-import blescan   ###uso blescan.py
+import blescan
 import sys
 
 import bluetooth._bluetooth as bluez
