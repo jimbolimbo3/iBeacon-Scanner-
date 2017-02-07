@@ -1,7 +1,6 @@
 # BLE iBeaconScanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # JCS 06/07/14
 
-DEBUG = False
 # BLE scanner based on https://github.com/adamf/BLE/blob/master/ble-scanner.py
 # BLE scanner, based on https://code.google.com/p/pybluez/source/browse/trunk/examples/advanced/inquiry-with-rssi.py
 
@@ -14,6 +13,8 @@ DEBUG = False
 
 # NOTE: Python's struct.pack() will add padding bytes unless you make the endianness explicit. Little endian
 # should be used for BLE. Always start a struct.pack() format string with "<"
+
+DEBUG = False
 
 import os
 import sys
@@ -146,7 +147,6 @@ def parse_events(sock, loop_count=100):
                 num_reports = struct.unpack("B", pkt[0])[0]
                 report_pkt_offset = 0
                 for i in range(0, num_reports):
-		
 		    if (DEBUG == True):
 			print "-------------"
                     	#print "\tfullpacket: ", printpacket(pkt)
@@ -160,24 +160,30 @@ def parse_events(sock, loop_count=100):
 	
                     	rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
                     	print "\tRSSI:", rssi
-                        #myFulllist= 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4]))-float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4]))/(10*1.8)) 
 		    # build the return string
                     #Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
-		    #Adstring += "Distanza"
-		    #Adstring += "%i" % 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])) - float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])) / (10 * 1.8)) 
+		    #Adstring += ","
+		    #Adstring += returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6]) 
 		    #Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
 		    #Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
 		    #Adstring += ","
-		    #Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])
+		    #Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -2])
 		    #Adstring += ","
-		    #Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])
-            #Adstring += "%i" % 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])) - float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])) / (10 * 1.8)) 
+		    #Adstring += "%i" % struct.unpack("b", pkt[report_pkt_offset -1])
+		    #Build a dictionary for the single result
+		    Adstring = {'MAC':packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9]),
+				'UUID': returnstringpacket(pkt[report_pkt_offset -22: report_pkt_offset - 6]),
+				'MAJOR': returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]), 
+				'MINOR': returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]),
+				'TxPOWER': struct.unpack("b", pkt[report_pkt_offset -2]),
+				'RSSI': struct.unpack("b", pkt[report_pkt_offset -1])}
 
 		    #print "\tAdstring=", Adstring
- 		    #myFullList.append(Adstring)
-
+ 		    myFullList.append(Adstring)
                 done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     return myFullList
+
+
