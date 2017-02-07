@@ -160,22 +160,24 @@ def parse_events(sock, loop_count=100):
 	
                     	rssi, = struct.unpack("b", pkt[report_pkt_offset -1])
                     	print "\tRSSI:", rssi
+                        #myFulllist= 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4]))-float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4]))/(10*1.8)) 
 		    # build the return string
-                    Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
+                    #Adstring = packed_bdaddr_to_string(pkt[report_pkt_offset + 3:report_pkt_offset + 9])
 		    #Adstring += "Distanza"
-		    #Adstring += "%i" % 10^((int(struct.unpack("b", pkt[report_pkt_offset - 2])) - int(struct.unpack("b", pkt[report_pkt_offset - 1]))) / (10 * n)) 
-		    Adstring += ","
+		    #Adstring += "%i" % 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])) - float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])) / (10 * 1.8)) 
+		    #Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -6: report_pkt_offset - 4]) 
 		    #Adstring += ","
 		    #Adstring += "%i" % returnnumberpacket(pkt[report_pkt_offset -4: report_pkt_offset - 2]) 
 		    #Adstring += ","
-		    Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])
-		    Adstring += ","
-		    Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])
-
+		    #Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])
+		    #Adstring += ","
+		    #Adstring += "%i" % float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])
+            #Adstring += "%i" % 10^(float(str(struct.unpack("b", pkt[report_pkt_offset -2]))[2:4])) - float(str(struct.unpack("b", pkt[report_pkt_offset -1]))[2:4])) / (10 * 1.8)) 
 
 		    #print "\tAdstring=", Adstring
- 		    myFullList.append(Adstring)
+ 		    #myFullList.append(Adstring)
+
                 done = True
     sock.setsockopt( bluez.SOL_HCI, bluez.HCI_FILTER, old_filter )
     return myFullList
