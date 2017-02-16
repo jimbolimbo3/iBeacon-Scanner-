@@ -30,12 +30,12 @@ GR = '\033[37m'  # gray
 
 def printLogo():
 	logo = """
-    _ ____                                 _____                                 
+    _ ____                                 _____
    (_) __ )___  ____ __________  ____     / ___/_________ _____  ____  ___  _____
   / / __  / _ \/ __ `/ ___/ __ \/ __ \    \__ \/ ___/ __ `/ __ \/ __ \/ _ \/ ___/
- / / /_/ /  __/ /_/ / /__/ /_/ / / / /   ___/ / /__/ /_/ / / / / / / /  __/ /    
-/_/_____/\___/\__,_/\___/\____/_/ /_/   /____/\___/\__,_/_/ /_/_/ /_/\___/_/     
-                                                                                 
+ / / /_/ /  __/ /_/ / /__/ /_/ / / / /   ___/ / /__/ /_/ / / / / / / /  __/ /
+/_/_____/\___/\__,_/\___/\____/_/ /_/   /____/\___/\__,_/_/ /_/_/ /_/\___/_/
+
 """
 	print logo
 
@@ -60,8 +60,13 @@ def badExit():
 def getDistance(txP):
 
 	dist = args.dz * math.exp( (args.pdz - txP)/( 10 * args.n ) )
-
-	return dist
+#        # crea un socket INET di tipo STREAM
+#s = socket.socket(
+#        socket.AF_INET, socket.SOCK_STREAM)
+#    # ora si connette al server web sulla porta 80
+#    #  - la normale porta http
+#s.connect(("www.mcmillan-inc.com", 80))
+        return dist
 
 
 
